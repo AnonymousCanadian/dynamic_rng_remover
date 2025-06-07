@@ -6,7 +6,7 @@ go-to: post_event if started = 1; start_menu if started = 0
 new-page: true
 go-to: start_menu_2
 
-= Social Democracy: An Alternate History
+= Dynamic Social Democracy: RNG Remover Submod
 
 @start_menu_2
 
@@ -1031,13 +1031,11 @@ Q.stampfer_advisor = 0; // Friedrich Stampfer
 set-bg: img/map_2.jpg
 new-page: true
 
-> *"Such a general development cannot be attributed to the false tactics of any single party or to the mistakes of individual leaders. On the contrary, the conduct of individual leaders is determined largely by the sentiments of the people as a whole. It would be erroneous, however, to regard the sentiments of the moment as reflecting the natural make-up and character of the people. They are merely the consequence of the special circumstances which have brought about this profound degradation of the entire nation."*
+Origin0's *Dynamic Mod* of Autumn Chen's *Social Democracy: An Alternate History* but I got rid of RNG.
 
- - Karl Kautsky, *Hitlerism and Social Democracy*, 1934
+Play the original game at *https://originn0.github.io/dynamic_social_democracy* before playing this. Please.
 
-This is a game of alternate history. While historical accuracy is a major concern, keep in mind that this is a *game*, and that any divergence from actual events will necessarily have to involve some element of make-believe. Nevertheless, please let the author know if there are any glaring mistakes.
-
-For more information on the politics and government of the German Republic, see the "Library" page on the top left. If this is your first time playing the game, it is strongly recommended that you read at least some of this information.
+Good luck on your speedrun!
 
 - @1928_mod_mode: Begin (<span style="color: #0077FF;">dynamic</span> mode)
 - @1928_easy: Begin (<span style="color: #5B9A8D;">easy</span> difficulty)
