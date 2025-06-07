@@ -17,6 +17,7 @@ Membership has surged, and fresh funding has arrived from all three coalition pa
 - @republic: Launch a mass propaganda campaign in support of the republic and in opposition to <span style="color: #808080;">dictatorship</span>.
 - @relation: Strengthen ties with the <span style="color: #000000;">We</span><span style="color: #DD0000;">im</span><span style="color: #FFCC00;">ar</span> coalition parties.
 - @easy_discard
+- @cancel_advisor_action
 
 @nazi
 on-arrival: workers_nsdap -= 2; new_middle_nsdap -= 2; old_middle_nsdap -= 2; catholics_nsdap -= 2
