@@ -19,6 +19,7 @@ In our media and campaign materials, who should we consider as our main opponent
 - @kpd: The <span style="color: #700000;">**KPD**</span>.
 - @bourgeois: The bourgeois parties - the [? if z_party_name != "CVP": <span style="color: #000000;">Center</span>?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] and [? if not lvp_formed and dvp_exist: <span style="color: #C0A054;">**DVP**</span>?][? if not lvp_formed and not dvp_exist: <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?][? if lvp_formed: <span style="color: #FFCC00;">**LVP**</span>?].
 - @easy_discard
+- @cancel_advisor_action
 
 @anti_dem
 on-arrival: enemies = "anti-democratic parties"; center_strength += 5; reformist_strength += 5; left_dissent += 5; workers_kpd -= 1.5; workers_nsdap -= 2; workers_dnvp -= 1 if dnvp_ideology == "Radical"; workers_dnf -= 1; unemployed_kpd -= 2; unemployed_nsdap -= 2; kpd_relation -= 10
