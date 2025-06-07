@@ -4,7 +4,7 @@ is-card: true
 on-arrival: streetfighting_timer = 6; month_actions += 1; rb_militarization_cost = 2 if rb_militancy > 0.1 else rb_militarization_cost = 1; rb_militarization_cost = 3 if rb_militancy > 0.25; strife += 1
 view-if: year >= 1930 and sa_strength >= 150 and streetfighting_timer == 0 and not return_to_normalcy and (chancellor != "Schleicher" or schleicher_time < 8)
 card-image: img/blutmai_2.jpg
-tags: party_affairs; antifascism
+tags: party_affairs, antifascism
 
 = Streetfighting
 
@@ -19,6 +19,7 @@ We must do something to protect the workers against these predations.
 - @peace: Try to avoid all militant confrontations, as much as possible.
 - @truce_rfb: Try to make peace with the <span style="color: #8B0000;">**RFB**</span>.
 - @easy_discard
+- @cancel_advisor_action
 
 @battle
 view-if: rb_militancy > 0.1 and rb_militancy < 0.5
