@@ -16,6 +16,7 @@ We receive dues at the end of each year, but can adjust them throughout. Low par
 - @reduce: Reduce dues.
 - @increase: Increase dues.
 - @easy_discard
+- @cancel_advisor_action
 
 @maintain
 subtitle: We gain [+ dues +] resources per year.
