@@ -16,6 +16,7 @@ Several young <span style="color: #f0456a;">socialists</span>, led by Carlo Mier
 - @support_neo: Support the neorevisionist movement.
 - @no_new_ideas: We don't need new ideas.
 - @easy_discard
+- @cancel_advisor_action
 
 @support_neo
 on-arrival: neorevisionist_strength += 10; nazi_urgency += 1; neorevisionism = 1; peoples_party_support += 1
