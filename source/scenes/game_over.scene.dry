@@ -352,7 +352,6 @@ We have helped to form a <span style="color: #001489;">European</span> <span sty
 
 @achievements
 title: Achievements
-view-if: achievement_game_completed == 1
 on-arrival: {!
 const toolsWrapper = document.getElementById('tools_wrapper');
 if (toolsWrapper) {
