@@ -1043,7 +1043,7 @@ on-arrival: difficulty = 1; resources = 0; dues = 3; base_dues = 3; rb_strength 
 go-to: 1928_main
 
 @1928_historical
-subtitle: Saving, loading, and polls will be disabled. [? if not achievement_game_completed: Not recommended for a first playthrough. ?]
+subtitle: Saving, loading, and polls are still enabled.
 on-arrival: {!
 Q.difficulty = 2;
 Q.historical_mode = 1;
