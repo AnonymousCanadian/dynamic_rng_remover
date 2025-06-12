@@ -212,8 +212,7 @@ window.disableGrayMode = function() {
 };
 
   window.changeTab = function(newTab, tabId, isRight) {
-      if (tabId == 'poll_tab' && (dendryUI.dendryEngine.state.qualities.historical_mode || dendryUI.dendryEngine.state.qualities.rubicon)) {
-          if (dendryUI.dendryEngine.state.qualities.historical_mode && !dendryUI.dendryEngine.state.qualities.rubicon) window.alert('Polls are not available in historical mode.');
+      if (tabId == 'poll_tab' && (dendryUI.dendryEngine.state.qualities.rubicon)) {
           if (dendryUI.dendryEngine.state.qualities.rubicon) window.alert('Polls are not available after crossing the rubicon.');
           return;
       }
