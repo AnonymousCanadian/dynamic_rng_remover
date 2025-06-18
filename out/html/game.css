@@ -775,6 +775,10 @@ th {
   stroke-width: 1.5px;
 }
 
+.seat.fkp {
+  fill: #00C0FF;
+}
+
 .seat.farm {
   fill: #38C538;
 }
@@ -867,4 +871,10 @@ th {
 
 .gray-mode span {
   color: inherit !important;
+}
+
+.achievement_subtitle {
+  font-size: 90%;
+  color: #444;
+  white-space: normal;
 }
