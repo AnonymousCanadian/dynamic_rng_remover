@@ -339,7 +339,6 @@ With local elections fast approaching, many parties have opted not to field thei
 @jarres
 title: Karl Jarres, mayor of Duisburg, former Vice-Chancellor, and the <span style="color: #C0A054;">**DVP**</span>'s candidate in 1925.
 view-if: jarres_unlock_pres
-subtitle: Second times a charm.
 on-arrival: reactionary_candidate_1932_count_2 -= 1
 face-image: img/portraits/jarres.jpg
 max-visits: 1
@@ -354,7 +353,6 @@ His candidacy is supported by the <span style="color: #C0A054;">**DVP**</span>.
 @luther
 title: Hans Luther, [? if luther_reichsbank: president of the Reichsbank?][? if not luther_reichsbank: leader of the [? if not lvp_formed: <span style="color: #C0A054;">**DVP**</span>?][? if lvp_formed: <span style="color: #FFCC00;">**LVP**</span>?]?] and former chancellor.
 view-if: luther_unlock_pres
-subtitle: Witty subtitle here.
 on-arrival: reactionary_candidate_1932_count_2 -= 1
 face-image: img/portraits/luther.jpg
 max-visits: 1
@@ -369,7 +367,6 @@ His candidacy is supported by the [? if not lvp_formed: <span style="color: #C0A
 @gessler
 title: Otto Gessler, controversial former Defense Minister and former <span style="color: #D3C24D;">**DDP**</span> member.
 view-if: gessler_unlock_pres
-subtitle: Witty subtitle here.
 on-arrival: reactionary_candidate_1932_count_2 -= 1
 face-image: img/portraits/gessler.jpg
 max-visits: 1
@@ -384,7 +381,6 @@ His candidacy is supported by the [? if not lvp_formed: <span style="color: #C0A
 @adenauer
 title: Konrad Adenauer, Mayor of Cologne, and an advocate for the <span style="color: #000000;">Center Party</span> "leaving the tower".
 view-if: adenauer_unlock_pres
-subtitle: Witty subtitle here.
 on-arrival: reactionary_candidate_1932_count_2 -= 1
 face-image: img/portraits/adenauer.jpg
 max-visits: 1
@@ -399,7 +395,6 @@ His candidacy is supported by the [? if z_party_name != "CVP": <span style="colo
 @bruning
 title: Heinrich Brüning, on the [? if not cvp_formed: right wing?][? if cvp_formed: left wing?] of the [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span>?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] and their[? if chancellor == "Brüning":&nbsp;candidate for?] chancellor.
 view-if: bruning_unlock_pres
-subtitle: Witty subtitle here.
 on-arrival: reactionary_candidate_1932_count_2 -= 1
 unavailable-subtitle: Words.
 face-image: img/portraits/BrüningHeinrich.jpg
@@ -415,7 +410,6 @@ His candidacy is supported by the [? if z_party_name != "CVP": <span style="colo
 @stegerwald
 title: Adam Stegerwald, on the [? if not cvp_formed: right wing?][? if cvp_formed: left wing?] of the [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span>?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] and a prominent Christian trade unionist.
 view-if: stegerwald_unlock_pres
-subtitle: Witty subtitle here.
 on-arrival: reactionary_candidate_1932_count_2 -= 1
 unavailable-subtitle: Words.
 face-image: img/portraits/stegerwald.jpg
@@ -431,7 +425,6 @@ His candidacy is supported by the [? if z_party_name != "CVP": <span style="colo
 @vorbeck
 title: Paul von Lettow-Vorbeck, war hero of the Great War and [? if not cvp_formed: [? if dnvp_ideology == "Radical": <span style="color: #0087DC;">**KVP**</span>?][? if dnvp_ideology == "Moderate": <span style="color: #3E88B3;">**DNVP**</span>?]?][? if cvp_formed: <span style="color: #000000;">**CVP**</span>?] member.
 view-if: vorbeck_unlock_pres
-subtitle: Lettow-Vorbeck is reluctant to lead, but perhaps his war hero status can unite the nation once more?
 on-arrival: reactionary_candidate_1932_count_2 -= 1
 unavailable-subtitle: Lettow-Vorbeck is reluctant to lead, and prefers his unglamorous life away from the public. Unless he is convinced, of course.
 face-image: img/portraits/lettowvorbeck.jpg
@@ -449,7 +442,6 @@ His candidacy is backed by the [? if not vorbeck_fallback: [? if not cvp_formed:
 @westarp
 title: Kuno von Westarp, [? if dnvp_leader != "Westarp": former?] leader of the <span style="color: #3E88B3;">**DNVP**</span>, and an old friend of Hindenburg.
 view-if: westarp_unlock_pres
-subtitle: Witty subtitle here.
 on-arrival: reactionary_candidate_1932_count_2 -= 1
 face-image: img/portraits/Kuno_von_Westarp.jpg
 max-visits: 1
@@ -498,7 +490,7 @@ The <span style="color: #3E88B3;">**Stahlhelm**</span>, infuriated by Hugenberg'
 - @nsdap_selection: Who will the <span style="color: #7A3C00;">**NSDAP**</span> run?
 
 @nsdap_selection
-go-to: hitler if nsdap_votes >= 15 and hitler_citizen; goring if not hitler_citizen; frick if nsdap_votes < 15 and hitler_citizen
+go-to: hitler if ((nsdap_votes >= 15 and hindenburg_run) or (nsdap_votes >= 10 and not hindenburg_run)) and hitler_citizen; goring if not hitler_citizen; frick if ((nsdap_votes < 15 and hindenburg_run) or (nsdap_votes < 10 and not hindenburg_run)) and hitler_citizen
 
 @hitler
 on-arrival: {!
@@ -508,7 +500,7 @@ Q.nsdap_candidate_1932_disp = "Adolf Hitler";
 view-if: not harzburg_unity
 face-image: img/portraits/hitler2.jpg
 
-The <span style="color: #7A3C00;">**NSDAP**</span> will run Adolf Hitler, who is likely to only receive the backing of his own party. However, there has been some reluctance on Hitler's part to run against President Hindenburg, with his character commanding great respect throughout all corners of Germany. Furthermore, the second most important leader in the <span style="color: #7A3C00;">**NSDAP**</span>, Gregor Strasser, opposes his candidacy as he believes he cannot defeat Hindenburg, but <span style="color: #7A3C00;">Nazi</span> propagandist Joseph Goebbels argues for it. We suspect that the <span style="color: #7A3C00;">Nazis</span> are putting on a show of indecisiveness, and always had Hitler as as candidate in mind.
+The <span style="color: #7A3C00;">**NSDAP**</span> will run Adolf Hitler, who is likely to only receive the backing of his own party. [? if hindenburg_run: However, there has been some reluctance on Hitler's part to run against President Hindenburg, with his character commanding great respect throughout all corners of Germany. Furthermore, the second most important leader in the <span style="color: #7A3C00;">**NSDAP**</span>, Gregor Strasser, opposes his candidacy as he believes he cannot defeat Hindenburg, but <span style="color: #7A3C00;">Nazi</span> propagandist Joseph Goebbels argues for it. We suspect that the <span style="color: #7A3C00;">Nazis</span> are putting on a show of indecisiveness, and always had Hitler as as candidate in mind. ?][? if not hindenburg_run: Hitler is somewhat reluctant to run in the election, believing he cannot win outright. However, the propaganda value of putting the charismatic Hitler forward ahead of the local elections has justified the risk. If he were to win, it would likely mean the swift collapse of the Republic—and possibly civil war. ?]
 
 - @communist: We await the decision the <span style="color: #700000;">Communists</span>.
 
@@ -520,7 +512,7 @@ Q.nsdap_candidate_1932_disp = "Wilhelm Frick";
 view-if: not harzburg_unity
 face-image: img/portraits/frick.jpg
 
-The <span style="color: #7A3C00;">**NSDAP**</span> has nominated Wilhelm Frick, who is expected to receive backing only from his own party. The decision to run Frick instead of the more charismatic and popular Hitler stems from Hitler’s deep reluctance to challenge the universally respected and personally popular President Hindenburg—believing such a move would tarnish his image. Gregor Strasser’s argument ultimately prevailed over Goebbels’, and Hitler has chosen to sit this one out. Should Frick win, he would serve as little more than a proxy for the <span style="color: #7A3C00;">Nazi</span> leader.
+The <span style="color: #7A3C00;">**NSDAP**</span> has nominated Wilhelm Frick, who is expected to receive backing only from his own party. [? if hindenburg_run: The decision to run Frick instead of the more charismatic and popular Hitler stems from Hitler’s deep reluctance to challenge the universally respected and personally popular President Hindenburg—believing such a move would tarnish his image. Gregor Strasser’s argument ultimately prevailed over Goebbels’, and Hitler has chosen to sit this one out. ?][? if not hindenburg_run: The decision to run Frick instead of the more charismatic and popular Hitler stems from Hitler’s reluctance to enter an unwinnable race, fearing it would damage his image. By putting forward the more pragmatic Frick, he hopes to attract some conservative support ahead of the local elections.?] Should Frick win, he would serve as little more than a proxy for the <span style="color: #7A3C00;">Nazi</span> leader. 
 
 - @communist: We await the decision the <span style="color: #700000;">Communists</span>.
 
