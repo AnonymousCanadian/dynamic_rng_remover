@@ -12,13 +12,39 @@ const historicalMode = q.historical_mode;
 
 const newlyAddedAchievements = [];
 
-let initialAchievements = new Set();
-
 if (Q.year == 1928 && Q.month <= 1) {
-    const initialAchievements = new Set(
+    Q.initialAchievements = new Set(
     Object.keys(q).filter(key => key.startsWith("game_achievement") || key.startsWith("achievement"))
     );
-    Q.initialAchievements = initialAchievements;
+    
+    for (const key of Q.initialAchievements) {
+        if (key.startsWith("achievement") && !key.startsWith("game_")) {
+            Q.initialAchievements.add("game_" + key);
+        }
+    }
+
+    console.log(Q.initialAchievements);
+}
+
+const initialAchievements = (Q.initialAchievements instanceof Set)
+  ? Q.initialAchievements
+  : new Set();
+
+
+if (Q.achievement_holy_moly) {
+    const content = document.getElementById('content');
+    if (content) {
+      content.style.border = '3px solid black'
+      content.style.boxShadow = '0 0 0 3px red, 0 0 0 6px gold';
+    }
+
+    if (Q.rubicon) {
+        const content = document.getElementById('content');
+        if (content) {
+          content.style.border = ''
+          content.style.boxShadow = '';
+        }
+    }
 }
 
 if (Q.rubicon && Q.chancellor != Q.nsdap_chancellor) {
@@ -852,6 +878,7 @@ if (Q.rubicon && Q.month_actions >= 1 && Q.month_actions != Q.month_actions_chec
         } else if (Q.year >= 1934) {
             Q.nazi_peak -= 15;
         }
+        if (Q.hitler_mode) Q.nazi_peak = 100;
     }   
     if (Q.nsdap_votes >= Q.nazi_peak && !Q.nazi_peak_triggered && Q.nsdap_votes >= 22) {
         Q.nazi_peak_triggered = 1;
@@ -4592,6 +4619,11 @@ if (Q.industrial_total_backing) {
         Q.old_middle_dvp += Q.industrial_dvp_backing/Q.industrial_total_backing;
         Q.rural_dvp += Q.industrial_dvp_backing/Q.industrial_total_backing/2;
     }
+    if (Q.lvp_votes_calculations + 0.2 < Q.lvp_votes_post_event) {
+        Q.new_middle_lvp += Q.industrial_lvp_backing/Q.industrial_total_backing;
+        Q.old_middle_lvp += Q.industrial_lvp_backing/Q.industrial_total_backing;
+        Q.rural_lvp += Q.industrial_lvp_backing/Q.industrial_total_backing/2;
+    }
     if (Q.dnvp_votes_calculations + 0.2 < Q.dnvp_votes_post_event) {
         Q.new_middle_dnvp += Q.industrial_dnvp_backing/Q.industrial_total_backing;
         Q.old_middle_dnvp += Q.industrial_dnvp_backing/Q.industrial_total_backing;
@@ -4995,7 +5027,7 @@ if (Q.spd_toleration || (Q.spd_in_government && !Q.in_spd_majority))
 }
 
 if (Q.chancellor == "Brüning") {
-    if (!Q.soziale_marktwirtschaft_start) Q.soziale_marktwirtschaft_start = Q.unemployed;
+    if (!Q.soziale_marktwirtschaft_start && Q.unemployed >= 15) Q.soziale_marktwirtschaft_start = Q.unemployed;
 } else {
     Q.soziale_marktwirtschaft_start = 0;
 }
@@ -5009,6 +5041,7 @@ if (!(Q.year == 1928 && Q.month <= 1)) {
       if ((key.startsWith("game_achievement") || key.startsWith("achievement")) && q[key] === 1) {
         if (!initialAchievements.has(key)) {
           newlyAddedAchievements.push(key);
+          console.log(newlyAddedAchievements)
         }
       }
     }
@@ -5024,13 +5057,17 @@ if ((!dynamicMode && !historicalMode && Q.difficulty != 1) || (Q.year == 1934 &&
     });
 
     if (stored) {
-      let parsed = JSON.parse(stored);
-      newlyAddedAchievements.forEach(key => {
-        const strippedKey = key.replace(/^game_achievement_|^achievement_/, '');
-        delete parsed[strippedKey];
-      });
+        let parsed = JSON.parse(stored);
+        console.log('Before deletion:', parsed);
 
-      localStorage[achievementsKey] = JSON.stringify(parsed);
+        newlyAddedAchievements.forEach(key => {
+            const strippedKey = key.replace(/^game_achievement_|^achievement_/, '');
+        if (parsed[strippedKey] !== undefined) {
+            delete parsed[strippedKey];
+        }
+    });
+    console.log('After deletion:', parsed);
+    localStorage[achievementsKey] = JSON.stringify(parsed);
     }
   }
 }

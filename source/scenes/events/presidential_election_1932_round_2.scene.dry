@@ -144,21 +144,23 @@ Q.center_president_crossover = 0;
 
 if (Q.spd_campaign) {
     Q.spd_president_votes += Q.spd_normalized;
-    if (!Q.media_rosenfeld_seen) {
-        Q.spd_president_votes -= (Q.new_middle_spd_normalized / 1500);
-        Q.spd_president_votes -= (Q.old_middle_spd_normalized / 1000);
-    } else if (Q.media_rosenfeld_seen) {
-        Q.spd_president_votes -= (Q.new_middle_spd_normalized / 2000);
-        Q.spd_president_votes -= (Q.old_middle_spd_normalized / 2000);
-    }
-    if (!Q.party_rosenfeld_seen) {
-        Q.spd_president_votes -= (Q.new_middle_spd_normalized / 1500);
-        Q.spd_president_votes -= (Q.old_middle_spd_normalized / 1500);
-        Q.spd_president_votes -= (Q.rural_spd_normalized / 1500);
-    } else if (Q.party_rosenfeld_seen) {
-        Q.spd_president_votes -= (Q.new_middle_spd_normalized / 1000);
-        Q.spd_president_votes -= (Q.old_middle_spd_normalized / 1000);
-        Q.spd_president_votes -= (Q.rural_spd_normalized / 1000);
+    if (Q.rosenfeld_campaign) {
+        if (!Q.media_rosenfeld_seen) {
+            Q.spd_president_votes -= (Q.new_middle_spd_normalized / 1500);
+            Q.spd_president_votes -= (Q.old_middle_spd_normalized / 1000);
+        } else if (Q.media_rosenfeld_seen) {
+            Q.spd_president_votes -= (Q.new_middle_spd_normalized / 2000);
+            Q.spd_president_votes -= (Q.old_middle_spd_normalized / 2000);
+        }
+        if (!Q.party_rosenfeld_seen) {
+            Q.spd_president_votes -= (Q.new_middle_spd_normalized / 1500);
+            Q.spd_president_votes -= (Q.old_middle_spd_normalized / 1500);
+            Q.spd_president_votes -= (Q.rural_spd_normalized / 1500);
+        } else if (Q.party_rosenfeld_seen) {
+            Q.spd_president_votes -= (Q.new_middle_spd_normalized / 1000);
+            Q.spd_president_votes -= (Q.old_middle_spd_normalized / 1000);
+            Q.spd_president_votes -= (Q.rural_spd_normalized / 1000);
+        }
     }
     if (Q.ddp_support_spd) {
         if (Q.ddp_ideology == "Left") {
@@ -643,7 +645,7 @@ Results:
 
 [? if thalmann_votes_rnd_1 > thalmann_votes + 2: The decline of [+ communist_candidate_1932 +]'s vote share is largely attributed to the futility of his campaign, with estimates suggesting that a significant portion of his former voters have either defected to [+ nsdap_candidate_1932 +] or abstained from the second round. The <span style="color: #700000;">**Communist**</span> camp is overcome with resignation, as this outcome suggests that the German masses are still far from ready for the revolutionary assault against capitalism that he and his party’s leadership had been preparing for. ?]
 
-[? if hindenburg_run: It is seen that [+ nsdap_candidate_1932 +] was the one to benefit from [+ dnvp_candidate_1932 +]'s withdrawal, rather than [+ reactionary_candidate_1932 +], having garnered 60% of his former voters. Even if [+ nsdap_candidate_1932 +] doesn't win, the destruction of the parties between the <span style="color: #7A3C00;">**NSDAP**</span> and [? if z_party_name != "CVP": <span style="color: #000000;">Center</span>?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will have drastic consequences for German democracy. ?]
+[? if hindenburg_run and not hitler_support_hindenburg: It is seen that [+ nsdap_candidate_1932 +] was the one to benefit from [+ dnvp_candidate_1932 +]'s withdrawal, rather than [+ reactionary_candidate_1932 +], having garnered 60% of his former voters. Even if [+ nsdap_candidate_1932 +] doesn't win, the destruction of the parties between the <span style="color: #7A3C00;">**NSDAP**</span> and [? if z_party_name != "CVP": <span style="color: #000000;">Center</span>?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will have drastic consequences for German democracy. ?]
 
 @hindenburg_wins
 on-arrival: president = "Hindenburg"; hindenburg_angry_bruning += 15 if not spd_campaign and spd_support_reactionary
@@ -671,11 +673,13 @@ on-arrival: president = nsdap_candidate_1932; chancellor = "Hitler"; chancellor_
 
 @braun_wins
 on-arrival: president = "Braun"; president_ideology = "Left"; reformist_dissent -= 15; center_dissent -= 15; labor_dissent -= 15; left_dissent -= 5; workers_spd += 6*(1-dissent); old_middle_spd += 4*(1-dissent); new_middle_spd += 4*(1-dissent); rural_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent);
+go-to: achievement_check_1
 
 Otto Braun of the <span style="color: #c00000;">**SPD**</span> has won the presidency! This is a moment of celebration for our party, and his victory is able to bolster our support.
 
 @rosenfeld_wins
 on-arrival: president = "Rosenfeld"; president_ideology = "Left"; center_dissent -= 5; labor_dissent -= 5; left_dissent -= 15; left_strength += 20; workers_spd += 9*(1-dissent); unemployed_spd += 6*(1-dissent); coup_progress += 4; capital_strike_progress += 4
+go-to: achievement_check_1
 
 Kurt Rosenfeld of the [? if not left_split: <span style="color: #c00000;">**SPD**</span>?][? if left_split: <span style="color: #9B0000;">**SAPD**</span>?] has won the presidency! This is a moment of celebration for our party, and his victory is able to bolster our support.
 
@@ -683,13 +687,23 @@ However, his leftism has sparked rumors of a planned "March on Berlin" by the <s
 
 @eckener_wins
 on-arrival: president = "Eckener"; president_ideology = "Moderate"; reformist_dissent -= 20; center_dissent -= 5; labor_dissent -= 5; reformist_strength += 20; workers_spd += 4*(1-dissent); unemployed_spd += 2*(1-dissent); old_middle_spd += 2*(1-dissent); new_middle_spd += 2*(1-dissent); rural_spd += 2*(1-dissent)
+achievement: zeppelin_kapitan
+go-to: achievement_check_1
 
 Nationally renown Zeppelin pilot and independent Hugo Eckener has won the presidency! This is a moment of celebration for our party, as his victory helps keep the <span style="color: #7A3C00;">Nazis</span> at bay.
 
 @duesterburg_wins
 on-arrival: president = "Braun"; president_ideology = "Left"; reformist_dissent -= 15; center_dissent -= 15; labor_dissent -= 15; left_dissent -= 5; workers_spd += 8*(1-dissent); old_middle_spd += 5*(1-dissent); new_middle_spd += 5*(1-dissent); rural_spd += 5*(1-dissent); unemployed_spd += 5*(1-dissent);
+go-to: achievement_check_1
 
 Duesterberg is too ashamed to accept the Presidency, and out of the kindness of his heart, has given it to Otto Braun. 
+
+@achievement_check_1
+on-arrival: neue_geschaftsfuhrung = 1 if chancellor == "Brüning" and spd_toleration
+go-to: neue_geschaftsfuhrung if neue_geschaftsfuhrung
+
+@neue_geschaftsfuhrung
+achievement: neue_geschaftsfuhrung
 
 @reactionary_candidate_majority
 go-to: jarres_win if (reactionary_candidate_1_plurality and reactionary_candidate_1932 == "Jarres") or (reactionary_candidate_2_plurality and secondary_reactionary_candidate_1932 == "Jarres"); gessler_win if (reactionary_candidate_1_plurality and reactionary_candidate_1932 == "Gessler") or (reactionary_candidate_2_plurality and secondary_reactionary_candidate_1932 == "Gessler"); luther_win if (reactionary_candidate_1_plurality and reactionary_candidate_1932 == "Luther") or (reactionary_candidate_2_plurality and secondary_reactionary_candidate_1932 == "Luther"); adenauer_win if (reactionary_candidate_1_plurality and reactionary_candidate_1932 == "Adenauer") or (reactionary_candidate_2_plurality and secondary_reactionary_candidate_1932 == "Adenauer"); bruning_win if (reactionary_candidate_1_plurality and reactionary_candidate_1932 == "Brüning") or (reactionary_candidate_2_plurality and secondary_reactionary_candidate_1932 == "Brüning"); stegerwald_win if (reactionary_candidate_1_plurality and reactionary_candidate_1932 == "Stegerwald") or (reactionary_candidate_2_plurality and secondary_reactionary_candidate_1932 == "Stegerwald"); vorbeck_win if (reactionary_candidate_1_plurality and reactionary_candidate_1932 == "Lettow-Vorbeck") or (reactionary_candidate_2_plurality and secondary_reactionary_candidate_1932 == "Lettow-Vorbeck"); westarp_win if (reactionary_candidate_1_plurality and reactionary_candidate_1932 == "Westarp") or (reactionary_candidate_2_plurality and secondary_reactionary_candidate_1932 == "Westarp")
